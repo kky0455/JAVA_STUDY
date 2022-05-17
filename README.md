@@ -108,3 +108,85 @@ public class 파일명 {
 |  삼항 연산자  |                  조건식 ?                   |
 |  대입 연산자  |              = *= /= %= += -=               |
 
+
+
+- 조건문
+
+  - if문 : ()안의 조건이 참일 때 해당 구문을 수행
+
+```java
+if (조건) {
+    실행구문
+}else if (다음 조건) {
+    실행구문
+}else {
+    실행구문
+}
+```
+
+
+
+  - 논리 연산자
+
+    - && : and 연산자
+    - || : or 연산자
+    - ! : not 연산자
+    - ^ : xor 연산자
+
+    
+
+  - 삼항 연산자
+
+```java
+int b1 = (조건) ? true값 : false값
+```
+
+
+
+- switch문
+  - 값에 해당하는 case를 찾아 실행문을 진행합니다.
+  - switch는 찾는 값 이후로 아래로 쭉 모두 실행하기 때문에 break문이 필요할 수 있습니다.
+  - default는 무조건 실행하는 문장입니다.
+  - 실행값이 같은 case문을 모아놓을 수 있습니다.
+
+```java
+switch (값) {
+    case 찾는값1:
+    case 찾는값2:
+        실행문;
+    case 찾는값3:
+    case 찾는값4:
+        실행문;
+    default :
+        실행문;
+}
+```
+
+
+
+- while문
+  - 조건이 참인동안 실행내용을 계속 반복합니다.
+
+```java
+while (조건) {
+    실행내용
+}
+```
+
+- do-while문
+  - 조건이 맞지 않아도 반드시 한번은 수행하는 while문
+  - 여기서 사용자의 input을 받기위해 Scanner를 사용함
+  - scan의 함수를 활용해 사용자 입력값의 타입을 결정해 받을 수 있음
+
+```java
+import java.util.Scanner;
+
+public static void main(String[] args) {
+        int value = 0;
+        Scanner scan = new Scanner(System.in);
+        do {
+			value = scan.nextInt();
+        }while(조건);
+    }
+```
+
