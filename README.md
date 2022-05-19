@@ -108,7 +108,7 @@ public class 파일명 {
 |  삼항 연산자  |                  조건식 ?                   |
 |  대입 연산자  |              = *= /= %= += -=               |
 
-
+## 22.05.18
 
 - 조건문
 
@@ -187,6 +187,92 @@ public static void main(String[] args) {
         do {
 			value = scan.nextInt();
         }while(조건);
+    }
+```
+
+## 22.05.20
+
+- for문
+  - 조건식이 참인 동안 계속 반복하는 방식
+  - 내부에 조건을 활용해 다양한 결과를 만들 수 있음 
+
+```java
+for(변수초기화; 조건식; 증감식){
+    
+}
+```
+
+
+
+- 배열
+  - 자바는 선언한 배열의 크기가 변하지 않으므로 조심해야함
+  - 선언할 땐 항상 new를 붙이기
+  - 배열의 변수는 하나인데 값은 여러개인 참조형 타입
+  - 아래와 같은 타입은 1차원 배열
+
+```java
+public static void main(String[] args) {
+        int[] array = new int[100];
+    	// 선언된 배열에 값 할당하기
+    	array[0] = 50;
+        array[10] = 100;
+    	// 배열을 선언하는 다양한 방법
+    	int[] array2 = new int[]{1, 2, 3, 4};
+        
+        int[] array3 = {1, 2, 3, 4};
+    }
+```
+
+- 배열 활용
+  - for문을 통해 배열에 값을 넣을 수 있음
+  - 외부에 변수를 생성하여 해당 변수에 for문을 통한 값을 넣을 수 있음
+  - 단 , 스코프 내에 선언된 변수는 밖에서 사용할 수 없으므로 저장할 변수는 밖에서 만들기
+
+```java
+public static void main(String[] args) {
+        int [] iarray = new int[100];
+
+        for (int i = 0; i < iarray.length; i++){
+            iarray[i] = i + 1;
+        }
+        int sum = 0;
+        for (int i = 0; i < iarray.length; i++){
+            sum += iarray[i];
+        }
+        System.out.println(sum);
+    }
+```
+
+- 2차원 배열
+  - 2차원 배열의 특징은 각 배열마다 다른 길이의 배열을 생성할 수 있다는 점
+
+```java
+public static void main(String[] args) {
+    	// 2차원 배열 선언 및 값 넣기
+        int[][] array1 = new int[3][4];
+    	array1[0][1] = 10;
+		
+    	// 2차원 배열 선언 및 활용하는 다른 방법
+        int[][] array2 = new int[3][];
+        array2[0] = new int[1];
+        array2[0][0] = 10;
+
+        int[][] array3 = {{1}, {1, 2}, {1, 2, 3}};
+        System.out.println(array3[0][0]);
+    
+    }
+```
+
+- foreach
+  - for(타입 값을 받아줄 변수명:출력하고 싶은 자료구조)
+  - 기존 for문과 다르게 자료 크기를 자동으로 판단하고 계산
+
+```java
+public static void main(String[] args) {
+    	int[] iarr = {10, 20, 30, 40, 50};
+        for(int value:iarr){
+            System.out.println(value);
+        }
     }
 ```
 
