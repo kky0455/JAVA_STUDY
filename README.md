@@ -276,3 +276,94 @@ public static void main(String[] args) {
     }
 ```
 
+## 22.05.21
+
+- 클래스
+  - 객체를 만들기위한 틀
+  - 만들어 놓은 클래스를 다른 파일에서 사용할 수 있음
+
+```java
+public class Car{
+    // 클래스 선언한 파일
+}
+```
+
+```java
+public static void main(String[] args) {
+        Car c1 = new Car();
+        Car c2 = new Car();
+    }
+```
+
+
+
+- 참조형 변수
+  - str변수 앞에 String클래스가 적혀있음
+  - = 뒤에 new는 생성자
+  - new 키워드는 객체를 메모리에 올려주며, 메모리에 올라간 객체를 인스턴스라고 함
+  - 메모리에 올라간 인스턴스를 가르키는 변수, 참조하는 변수, 레퍼런스 하는 변수가 str이며 참조, 레퍼런스라는 것은 변수가 인스턴스를 가지고 있는게 아닌 가리킨다는 의미
+  - str이라는 변수에 메모리의 위치 값이 저장되어 있지만 어떤 메모리에 저장되는지 그 정보를 알 수 있는 방법은 없기 때문에 참조한다라고만 표현함
+
+```java
+public static void main(String[] args) {
+        String str = new String ("hello");
+    }
+```
+
+
+
+- String클래스
+
+  - 생성 방식에 따라 저장하는 방식이 다름
+
+  - ```java
+    public static void main(String[] args) {
+        String str1 = "hello";
+        String str2 = "hello";
+    }
+    ```
+
+  - 이 방식은 값을 상수영역에 저장, 변하지 않는 값
+
+  - 동일 값을 중복 생성 시 이미 메모리 영역에 존재하는 값이면 같은 인스턴스를 가리킴
+
+  - ```java
+    public static void main(String[] args) {
+        String str3 = new String("hello");
+        String str4 = new String("hello");
+    }
+    ```
+
+  - 이 방식으로 생성할 경우 새로운 인스턴스를 힙영역에 생성
+
+  - 동일 값을 중복 생성해도 다른 영역에 생성
+
+- 필드
+
+  - 선언한 클래스에서 필드라는 용어로 다양한 속성을 활용
+
+  - ```java
+    public class Car{
+            String name;    
+            int number;
+        }
+    ```
+
+  - 위에 선언한 클래스를 다른 곳에서 인스턴스화하여 객체마다 다르게 활용 가능
+
+  - ```java
+    Car c1 = new Car();
+    Car c2 = new Car();
+    
+    c1.name = "소방차";  
+    c1.number = 1234;  
+    c2.name = "구급차";
+    c2.number = 1004; 
+    
+    
+    System.out.println(c1.name); 
+    System.out.println(c1.number); 
+    String name = c2.name;
+    ```
+
+    
