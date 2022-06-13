@@ -366,7 +366,7 @@ public static void main(String[] args) {
     String name = c2.name;
     ```
 
-    
+## 22.05.22
 
 - 메소드
 
@@ -390,3 +390,990 @@ public static void main(String[] args) {
   - 매개변수가 없다면 (), 여러개라면 ,로 구분하여 넣어주자
 
   - 리턴이 있을 때 구현부분에 return을 적어주자
+  
+- 메소드 활용
+
+  - ```java
+    public static void main(String[] args) {
+            MyClass myclass = new MyClass();
+            myclass.메소드명();
+        	// 인자를 받는 경우
+            myclass.method2(10);
+        	// 리턴이 있는 경우
+        	int value = myclass.method3();
+        }
+    ```
+
+  - 메소드가 존재하는 클래스를 새롭게 선언
+
+  - 그 메소드가 인자를 요구하는지, 리턴이 있는지에 따라 맞춰서 함수를 실행
+
+
+
+## 22.06.04
+
+- String 메소드
+
+  - 문자열 길이 구하기(length)
+
+  - ```java
+    System.out.println(str.length());  //str
+    ```
+
+  - 문자열 붙이기(concat)
+
+  - ```java
+    String str = new String("hello");
+    
+    System.out.println(str.concat(" world"));  //출력결과는 hello world 
+    System.out.println(str);  //출력결과는 hello 
+    ```
+
+  - 문자열 자르기(subString)
+
+  - ```java
+    System.out.println(str.substring(1, 3)); //출력결과  el
+    System.out.println(str.substring(2));   //출력결과 llo world
+    ```
+
+- 변수의 scope와 static
+
+  - scope : 사용되는 변수가 사용 가능한 범위, 보통 선언된 블럭이 그 변수의 사용범위
+
+  - ```java
+    public class ValableScopeExam{
+    
+            int globalScope = 10;   // 인스턴스 변수 
+    
+            public void scopeTest(int value){   
+                int localScope = 10;
+                System.out.println(globalScope);
+                System.out.println(localScpe);
+                System.out.println(value);
+            }
+        }
+    ```
+
+  - 클래스 속성인 globalScope의 범위는 클래스 전체
+
+  - 매개변수와 메소드 내 선언된 localScope는 메소드 블럭 내에서 사용 가능
+
+  - main은 static한 메소드이기 때문에 static하지 않은 globalScope는 사용불가
+
+  - ```java
+    public class VariableScopeExam {
+            int globalScope = 10; 
+    
+            public void scopeTest(int value){
+                int localScope = 20;            
+                System.out.println(globalScope);
+                System.out.println(localScope);
+                System.out.println(value);
+            }   
+            public static void main(String[] args) {
+                System.out.println(globalScope);  //오류
+                System.out.println(localScope);   //오류
+                System.out.println(value);        //오류  
+            }   
+        }
+    ```
+
+  - static : 클래스가 인스턴스화 되지 않아도 사용할 수 있음
+
+  - ```java
+    public class VariableScopeExam {
+            int globalScope = 10; 
+            static int staticVal = 7;
+    
+            public void scopeTest(int value){
+                int localScope = 20;        
+            }
+    
+            public static void main(String[] args) {
+                System.out.println(staticVal);      //사용가능 
+            }
+    
+        }
+    ```
+
+  - static한 변수는 저장할 수 있는 공간이 하나만 생성됨
+
+  - ```java
+    ValableScopeExam v1 = new ValableScopeExam();
+    ValableScopeExam v2 = new ValableScopeExam();
+    v1.golbalScope = 20;
+    v2.golbalScope = 30; 
+    
+    System.out.println(v1.golbalScope);  //20 이 출력된다. 
+    System.out.println(v2.golbalScope);  //30이 출력된다. 
+    
+    v1.staticVal = 10;
+    v2.staticVal = 20; 
+    
+    System.out.println(v1.statVal);  //20 이 출력된다. 
+    System.out.println(v2.statVal);  //20 이 출력된다. 
+    ```
+
+  - globalScope는 인스턴스가 생성될 때 생성되기 때문에 인스턴스 변수라고 함
+
+  - staticVal은 클래스 변수
+
+- 열거형(enum)
+
+  - ```java
+    public class EnumExam {
+            public static final String MALE = "MALE";
+            public static final String FEMALE = "FEMALE";
+    
+            public static void main(String[] args) {
+                String gender1;
+    
+                gender1 = EnumExam.MALE;
+                gender1 = EnumExam.FEMALE;                  
+            }
+        }
+    
+    ```
+
+    - 위는 MALE, FEMALE이 아닌 값이 들어가도 문제가 발생하지 않는다.
+
+  - ```java
+    Gender gender2;
+    
+    gender2 = Gender.MALE;
+    gender2 = Gender.FEMALE;
+    
+    enum Gender{
+            MALE, FEMALE;
+        }
+    ```
+
+    - 위와 같은 방식을 통해 열거형을 사용할 수 있으며, 정해진 값만 입력가능하다.
+
+- 생성자
+
+  - 리턴타입이 없다
+
+  - 프로그래머가 만들지 않으면 매개변수가 없는 생성자가 컴파일할 때 자동으로 생성
+
+  - 매개변수가 없는 생성자는 기본생성자
+
+  - 생성자를 하나라도 프로그래머가 만들었다면 기본생성자는 자동으로 만들어지지 않는다
+
+  - ```java
+    public class Car{
+            String name;
+            int number;
+    
+            public Car(String n){
+                name = n;
+            }
+        }
+    ```
+
+    - 생성자는 객체가 될 때 필드를 초기화하는 역할
+    - 위 코딩은 객체가 반드시 이름을 갖고 생성되도록 생성자를 작성
+
+  - ```java
+    public class CarExam2{
+            public static void main(String args[]){
+    
+                Car c1 = new Car("소방차");
+                Car c2 = new Car("구급차");
+                //Car c3 = new Car(); // 컴파일 오류가 발생합니다.
+    
+                System.out.println(c1.name);
+    
+                System.out.println(c2.name);
+            }
+        }
+    ```
+
+    - Car클래스는 기본생성자를 갖지 않으므로 반드시 매개변수가 들어가야한다.
+
+- this
+
+  - ```java
+    public Car(String name){
+            name = name;
+    }
+    ```
+
+    - 앞서 String n은 n이 무엇을 의미하는지 쉽게 할 수 없음
+    - n보다는 명확하게 name으로 나타내는게 좋다.
+    - 하지만 이 경우 name이라는 변수명이 중복되고, 가깝게 선언된 변수를 우선 사용하므로 잘못된 결과를 가져온다.
+
+  - ```java
+    public Car(String name){
+            this.name = name;
+        }
+    ```
+
+    - 이 때, 필드라는 것을 컴파일러와 JVM에게 알려주기 위해 this키워드를 사용
+    - 앞에 name은 필드를 말하고 뒤에 name은 매개변수를 의미
+
+- 메소드 오버로딩
+
+  - 매개변수 유형과 개수를 다르게 해 같은 이름의 메소드를 여러 개 가질 수 있게하는 기술
+
+  - ```java
+    class MyClass2{
+            public int plus(int x, int y){
+                return x+y;
+            }
+    
+            public int plus(int x, int y, int z){
+                return x + y + z;
+            }
+    
+            public String plus(String x, String y){
+                return x + y;
+            }
+        }
+    ```
+
+    - 이름은 같지만 매개변수가 다른 메소드
+    - 단, 매개변수명은 다르지만, 타입과 개수가 동일한 메소드를 또 정의할 수 없다.
+
+  - ```java
+    public MethodOverloadExam{
+            public static void main(String args[]){
+                MyClass2 m = new MyClass2();
+                System.out.println(m.plus(5,10));
+                System.out.println(m.plus(5,10,15));
+                System.out.println(m.plus("hello" + " world"));
+            }
+        }
+    ```
+
+    - 메소드의 인자에 어떤 값이 쓰이느냐에 따라 각기 다른 메소드가 호출
+
+- 생성자 오버로딩과 this
+
+  - 생성자의 매개변수의 유형과 개수를 다르게하여 같은 이름의 생성자 여러 개를 만들 수 있다.
+
+  - ```java
+    public class Car{
+            String name;
+            int number;
+    
+            public Car(){
+    
+            }
+    
+            public Car(String name){
+                this.name = name;
+            }
+    
+            public Car(String name, int number){
+                this.name = name;
+                this.number = number;
+            }
+        }
+    ```
+
+    - 생성자도 메소드와 마찬가지로 여러개 선언 가능
+    - 매개변수의 수와 타입이 다르다면 여러개의 생성자를 선언 가능
+
+  - ```java
+    public class CarExam4{
+            public static void main(String args[]){
+                // 오버로딩된 생성자 이용
+                Car c1 = new Car();
+                Car c2 = new Car("소방차");
+                Car c3 = new Car("구급차", 1234);
+            }
+        }
+    ```
+
+  - ```java
+    public Car(){
+            this.name = "이름없음";
+            this.number = 0;
+        }
+    ```
+
+    - 위와 같은 기본생성자는 코드의 중복이 발생
+
+  - ```java
+    public Car(){
+            this("이름없음", 0);
+        }
+    ```
+
+    - 위 방법을 통해 자신의 생성자를 호출하여 중복을 방지할 수 있음
+
+    
+
+- 패키지 : 서로 관련있는 클래스 또는 인터페이스들을 묶어 놓은 묶음
+
+  - 보통 도메인 이름을 거꾸로 적은 후, 그 뒤에 프로젝트 이름을 붙여서 생성
+  - 각 폴더명은 숫자로 시작할 수 없음
+  - 다른 패키지에 있는 클래스를 사용하려면 import 구문을 적어줘야함
+
+
+
+- 상속 : 부모 클래스가 가지고 있는 것을 자식 클래스에게 물려주는 것
+
+  - ```java
+    public class Car{
+    
+        }
+    
+    public class Bus extends Car{
+    
+        }
+    ```
+
+    - 자바는 클래스 이름 뒤에 extends 키워드를 적고 부모클래스 이름을 적게 되면 부모 클래스가 갖고 있는 것을 상속받을 수 있음
+
+  - ```java
+    public class Car{
+            public void run(){
+                System.out.println("달리다.");
+            }
+        }
+    ```
+
+  - ```java
+    public class BusExam{
+            public static void main(String args[]){
+                Bus bus = new Bus();
+                bus.run();  
+                //Bus class 는 아무런 코드를 가지지 않는다. 그럼에도 run 이라는 메소드를 사용하는데 문제가 발생되지 않는다. 
+            }   
+        }
+    ```
+
+    - bus는 Car에 존재하는 run메소드를 사용할 수 있고 자체적으로 선언한 메소드가 있다면 같이 사용할 수 있음.
+
+
+
+- 접근제한자 : 클래스 내에서 멤버의 접근을 제한하는 역할
+
+  - public : 어떤 클래스든 접근할 수 있다
+
+  - protected : 자기 자신 / 같은 패키지 / 서로 다른 패키지여도 상속받은 자식 클래스에서 접근할 수 있음
+
+  - private : 자기 자신만 접근할 수 있음
+
+  - 접근제한자를 적지 않으면 default : 자기자신과 같은 패키지에서만 접근할 수 있음
+
+  - ```java
+    public class AccessObj{
+            private int i = 1;
+            int k = 2; // default접근 제한자
+            public int p = 3;
+            protected int p2 = 4;
+        }
+    ```
+
+  - ```java
+    // 같은 패키지 내에서 사용
+    public class AccessObjExam{
+            public static void main(String args[]){
+                AccessObj po = new AccessObj();
+    
+                System.out.println(po.i); // 컴파일 오류가 발생합니다.
+                System.out.println(po.k);
+                System.out.println(po.p);
+                System.out.println(po.p2);
+            }
+        }
+    ```
+
+  - ```java
+    // 다른 패키지 내에서 사용
+    public class AccessObjExam{
+            public static void main(String args[]){
+                AccessObj po = new AccessObj();
+    
+                System.out.println(po.i); // 컴파일 오류가 발생합니다.
+                System.lout.println(po.k);// 컴파일 오류가 발생합니다.
+                System.lout.println(po.p);
+                System.lout.println(po.p2);// 컴파일 오류가 발생합니다.
+            }
+        }
+    ```
+
+  - ```java
+    // 상속받은 후 사용
+    public class AccessObjExam extends AccessObj{
+            public static void main(String[] args) {
+                AccessObjExam obj = new AccessObjExam();
+                System.out.println(obj.p);
+                System.out.println(obj.p2);
+                System.out.println(obj.k);// 컴파일 오류가 발생합니다.
+                System.out.println(obj.i);// 컴파일 오류가 발생합니다.
+            }
+        }
+    ```
+
+
+
+- 추상클래스 : 구체적이지 않은 클래스
+
+  - ```java
+    public abstract class Bird{
+            public abstract void sing();
+    
+            public void fly(){
+                System.out.println("날다.");
+            }
+        }
+    ```
+
+    - 클래스 앞에 abstract 키워드를 이용해서 정의
+    - 미완성의 추상 메소드(내용X) 포함 가능
+    - 추상 메소드는 리턴타입 앞에 abstract 키워드 붙여야함
+    - 인스턴스 생성 불가
+
+  - ```java
+    public class Duck extends Bird{
+            @Override
+            public void sing() {
+                System.out.println("꽥꽥!!");
+            }
+        }
+    ```
+
+    - 추상 클래스를 상속받은 클래스는 반드시 추상메소드를 구현해야함
+    - 만약 상속받고, 추상 메소드를 구현하지 않으면 그 클래스도 추상클래스가 됨
+
+## 22.06.08
+
+- super와 부모생성자 
+
+  - class가 인스턴스화 될 때 생성자가 실행되면서 객체를 초기화, 이 때 자신의 생성자만 실행이 되는 것이 아니고 부모 생성자부터 실행
+
+  - ```java
+    // 부모 생성자
+    public class Car{
+            public Car(){
+                System.out.println("Car의 기본생성자입니다.");
+            }
+        }
+    
+        public class Bus extends Car{
+            public Bus(){
+                System.out.println("Bus의 기본생성자입니다.");
+            }
+    
+        }
+    ```
+
+  - ```java
+    // 생성자 테스트
+    public class BusExam{
+            public static void main(String args[]){
+                Bus b = new Bus();
+            }
+        }
+    ```
+
+  - Car의 기본생성자입니다. 
+
+  - Bus의 기본생성자입니다.
+
+    - new 연산자로 Bus객체를 생성하면, Bus객체가 메모리에 올라갈때 부모인 Car도 함께 메모리에 올라간다.
+    - 생성자는 객체를 초기화 하는 일을한다.
+    - 생성자가 호출될 때 자동으로 부모의 생성자가 호출되면서 부모객체를 초기화 하게된다.
+
+  - super
+
+    - 자신을 가리키는 키워드가 this 라면, 부모들 가리키는 키워드는 super
+    - super() 는 부모의 생성자를 의미한다.
+    - 부모의 생성자를 임의로 호출하지 않으면, 부모 class의 기본 생성자가 자동으로 호출된다.
+    - 아래 예제처럼 호출해보면 위에서 super()를 호출하지 않을때와 결과가 같다.
+
+  - ```java
+    // 부모의 기본생성자가 없는 경우
+    public class Car{
+            public Car(String name){
+                System.out.println(name + " 을 받아들이는 생성자입니다.");
+            }
+        }
+    ```
+
+  - ```java
+    public Bus(){
+            super("소방차"); // 문자열을 매개변수로 받는 부모 생성자를 호출하였다.
+            System.out.println("Bus의 기본생성자입니다.");
+        }
+    ```
+
+    - 이런 문제를 해결하려면 자식 클래스의 생성자에서 직접 부모의 생성자를 호출해야 합니다.
+
+- 오버라이딩
+
+  - 부모의 메소드를 자식쪽에서 재정의 하는 것
+
+  - ```java
+    //run 메소드를 가지고 있는  Car클래스 
+        public class Car{
+            public void run(){
+                System.out.println("Car의 run메소드");
+            }
+        }
+    
+        //Car 를 상속받는 Bus 클래스 
+        public class Bus extends Car{
+    
+        }
+    
+        public class BusExam{
+            public static void main(String args[]){
+                Bus bus = new Bus();
+                bus.run();  //Car의 run메소드가 실행된다. 
+            }
+        }
+    ```
+
+  - ```java
+    public class Bus extends Car{
+    	// 부모쪽과 모양이 같은 메소드 선언
+            public void run(){
+                System.out.println("Bus의 run메소드");
+            }
+        }
+    
+        public class BusExam{
+            public static void main(String args[]){
+                Bus bus = new Bus();
+                bus.run();  //Bus run메소드가 실행된다. 
+            }
+        }
+    ```
+
+  - 실행 시 자식쪽에 정의 된 메소드가 실행된다.
+
+  - 만약 부모메소드를 실행하고싶다면 super를 활용하여 호출할 수 있다.
+
+  - ```
+    public class Bus extends Car{
+            public void run(){
+                **super.run();**  // 부모의  run()메소드를 호출 
+                System.out.println("Bus의 run메소드");
+            }
+        }
+    ```
+
+
+
+- 클래스 형변환
+
+  - 부모타입으로 자식객체를 참조 시 자식객체가 가진 메소드나 속성을 사용하고 싶을 때 사용
+
+  - ```java
+    // 클래스 선언
+    public class Car{
+            public void run(){
+                System.out.println("Car의 run메소드");
+            }
+        }
+    
+        public class Bus extends Car{
+            public void ppangppang(){
+                System.out.println("빵빵.");
+            }   
+        }
+    ```
+
+  - ```java
+    // 부모가 가지고 있는 메소드만 사용 가능
+    public class BusExam{
+            public static void main(String args[]){
+                Car car = new Bus();
+                car.run();
+                car.ppangppang(); // 컴파일 오류 발생
+            }
+        }
+    ```
+
+  - ```java
+    // 자식 메소드도 사용하고 싶을 시 클래스 형변환을 사용할 수 있다.
+    public class BusExam{
+            public static void main(String args[]){
+                Car car = new Bus();
+                car.run();
+                //car.ppangppang(); // 컴파일 오류 발생
+    
+                Bus bus = (Bus)car;  //부모타입을 자식타입으로 형변환 
+                bus.run();
+                bus.ppangppang();
+            }
+        }
+    ```
+
+  - 상속관계에 있었을 때만 가능
+
+  - 부모타입으로 자식타입의 객체를 참조할 때는 묵시적으로 형변환 발생
+
+
+
+- 인터페이스 : 서로 관계가 없는 물체들이 상호 작용을 하기 위해서 사용하는 장치나 시스템
+
+  - 인터페이스 정의법
+
+  - 
+
+  - ```java
+    // 추상메소드와 상수를 정의할 수 있음
+    public interface TV{
+            public int MAX_VOLUME = 100;
+            public int MIN_VOLUME = 0;
+    
+            public void turnOn();
+            public void turnOff();
+            public void changeVolume(int volume);
+            public void changeChannel(int channel);
+    }
+    ```
+
+  - ```java
+    // 컴파일시 자동으로 아래와 같이 변경됨
+    public static final int MAX_VOLUME = 100;
+    public static final int MIN_VOLUME = 0;
+    ```
+
+  - ```java
+    // 인터페이스 메소드는 다음과 같이 추상메소드로 변경
+    public abstract void on();
+    public abstract void off();
+    public abstract void volume(int value);
+    public abstract void channel(int number);
+    ```
+
+- 인터페이스 사용
+
+  - ```java
+    // 인터페이스를 구현하는 클래스에서 implements키워드를 이용
+    public class LedTV implements TV{
+            public void on(){
+                System.out.println("켜다");
+            }
+            public void off(){
+                System.out.println("끄다");   
+            }
+            public void volume(int value){
+                System.out.println(value + "로 볼륨조정하다.");  
+            }
+            public void channel(int number){
+                System.out.println(number + "로 채널조정하다.");         
+            }
+        }
+    ```
+
+  - ```java
+    // 인터페이스의 메소드를 활용할 수 있음
+    public class LedTVExam{
+            public static void main(String args[]){
+                TV tv = new LedTV();
+                tv.on();
+                tv.volume(50);
+                tv.channel(6);
+                tv.off();
+            }
+        }
+    ```
+## 22.06.10
+
+- default메소드(Java8이 등장하며 변경된 interface 기능)
+
+  - 인터페이스에 default로 선언된 메소드는 이를 구현할 수 있으며, 이를 구현하는 클래스는 오버라이딩할 수 있다.
+
+  - ```java
+    public interface Calculator {
+            public int plus(int i, int j);
+            public int multiple(int i, int j);
+            default int exec(int i, int j){      //default로 선언함으로 메소드를 구현할 수 있다.
+                return i + j;
+            }
+        }
+    
+        //Calculator인터페이스를 구현한 MyCalculator클래스
+        public class MyCalculator implements Calculator {
+    
+            @Override
+            public int plus(int i, int j) {
+                return i + j;
+            }
+    
+            @Override
+            public int multiple(int i, int j) {
+                return i * j;
+            }
+        }
+    
+        public class MyCalculatorExam {
+            public static void main(String[] args){
+                Calculator cal = new MyCalculator();
+                int value = cal.exec(5, 10);
+                System.out.println(value);
+            }
+        }
+    ```
+
+    - 인터페이스 변경 시, 이를 구현하는 모든 클래스가 해당 메소드를 구현해야 하는 문제가 있는데 이를 해결하기 위해 default기능을 추가하였다.
+
+- static메소드
+
+  - ```java
+    public interface Calculator {
+            public int plus(int i, int j);
+            public int multiple(int i, int j);
+            default int exec(int i, int j){
+                return i + j;
+            }
+            public static int exec2(int i, int j){   //static 메소드 
+                return i * j;
+            }
+        }
+    
+        //인터페이스에서 정의한 static메소드는 반드시 인터페이스명.메소드 형식으로 호출해야한다.  
+    
+        public class MyCalculatorExam {
+            public static void main(String[] args){
+                Calculator cal = new MyCalculator();
+                int value = cal.exec(5, 10);
+                System.out.println(value);
+    
+                int value2 = Calculator.exec2(5, 10);  //static메소드 호출 
+                System.out.println(value2);
+            }
+        }
+    ```
+
+    - static메소드를 인터페이스에 선언함으로, 인터페이스를 이용한 간단한 기능을 가진 유틸리티성 인터페이스를 만들 수 있다.
+
+- 내부클래스
+
+  - 인스턴스 클래스 : 필드를 선언하는 위치에 선언되는 클래스 안 인스턴스 변수
+
+  - ```java
+    public class InnerExam1{
+            class Cal{
+                int value = 0;
+                public void plus(){
+                    value++;
+                }
+            }
+    
+            public static void main(String args[]){
+                InnerExam1 t = new InnerExam1();
+                InnerExam1.Cal cal = t.new Cal();
+                cal.plus();
+                System.out.println(cal.value);
+    
+            }
+        }
+    ```
+
+  - static 클래스 : 내부 클래스가 static으로 정의된 경우
+
+  - ```java
+    public class InnerExam2{
+            static class Cal{
+                int value = 0;
+                public void plus(){
+                    value++;
+                }
+            }
+    
+            public static void main(String args[]){
+                InnerExam2.Cal cal = new InnerExam2.Cal();
+                cal.plus();
+                System.out.println(cal.value);
+    
+            }
+        }
+    ```
+
+  - 지역클래스 : 메소드 안에 클래스를 선언한 경우
+
+  - ```java
+    public class InnerExam3{
+            public void exec(){
+                class Cal{
+                    int value = 0;
+                    public void plus(){
+                        value++;
+                    }
+                }
+                Cal cal = new Cal();
+                cal.plus();
+                System.out.println(cal.value);
+            }
+    
+    
+            public static void main(String args[]){
+                InnerExam3 t = new InnerExam3();
+                t.exec();
+            }
+        }
+    ```
+
+  - 익명클래스 : 생성자 이름에 해당하는 클래스를 상속받는 이름없는 객체를 만드는 것
+
+  - ```java
+    //추상클래스 Action 
+        public abstract class Action{
+            public abstract void exec();
+        }
+    
+        //추상클래스 Action을 상속받은 클래스 MyAction
+    
+        public class MyAction extends Action{
+            public void exec(){
+                System.out.println("exec");
+            }
+        }
+    
+        //MyAction을 사용하는 클래스 ActionExam 
+        public class ActionExam{
+            public static void main(String args[]){
+                Action action = new MyAction();
+                action.exec();
+            }
+        }
+    
+        //MyAction을 사용하지 않고 Action을 상속받는 익명 클래스를 만들어서 사용하도록 수정해 보도록 하겠습니다.
+        public class ActionExam{
+            public static void main(String args[]){
+                Action action = new Action(){
+                    public void exec(){
+                        System.out.println("exec");
+                    }
+                };
+                action.exec();
+            }
+        }
+    ```
+
+    - Action을 상속받는 클래스가 해당 클래스에서만 사용되고 다른 클래스에서 사용되지 않을경우 활용할 수 있음
+
+- Exception
+
+  - 프로그램 실행중 예기치 못한 사건을 예외라고 하는데, 이를 미리 예측하고 처리하는 과정을 예외처리라고 함
+
+  - ```java
+    public class ExceptionExam {
+            public static void main(String[] args) {
+                int i = 10;
+                int j = 0;
+                try{
+                    int k = i / j;
+                    System.out.println(k);
+                }catch(ArithmeticException e){
+                    System.out.println("0으로 나눌 수 없습니다. : " + e.toString());
+                }finally {
+                    System.out.println("오류가 발생하든 안하든 무조건 실행되는 블록입니다.");
+                }
+            }
+        }
+    ```
+
+    - try블록에서 여러종류의 예외가 발생한다면 catch블록을 여러개 만들 수 있음
+    - Exception을 두게되면 어떤 오류가 발생하던지 하나의 catch블록에서 모든 오류를 처리할 수 있다.
+
+## 22.06.13
+
+- Throws : 예외가 발생했을 때 예외를 호출한 쪽에서 처리하도록 던져주는 것
+
+  - ```java
+    package javaStudy;
+        public class ExceptionExam2 {
+    
+            public static void main(String[] args) {
+                int i = 10;
+                int j = 0;
+                try{
+                    int k = divide(i, j);
+                    System.out.println(k);
+                } catch(ArithmeticException e){
+                    System.out.println("0으로 나눌수 없습니다.");
+                }
+    
+            }
+    
+            public static int divide(int i, int j) throws ArithmeticException{
+                int k = i / j;
+                return k;
+            }
+    
+        }
+    ```
+
+- throw : 강제로 오류를 발생시킴
+
+  - ```java
+    public class ExceptionExam3 {   
+            public static void main(String[] args) {
+                int i = 10;
+                int j = 0;
+                try{
+                    int k = divide(i, j);
+                    System.out.println(k);
+                }catch(IllegalArgumentException e){
+                    System.out.println("0으로 나누면 안됩니다.");
+                }           
+            }
+    
+            public static int divide(int i, int j) throws IllegalArgumentException{
+                if(j == 0){
+                    throw new IllegalArgumentException("0으로 나눌 수 없어요.");
+                }
+                int k = i / j;
+                return k;
+            }   
+        }
+    ```
+
+
+
+- 사용자 정의 Exception
+
+  - Exception 클래스를 상속받아 정의한 checked Exception
+
+  - RuntimeException 클래스를 상속 받아 정의한 unChecked Exception
+
+  - ```java
+    // RuntimeException을 상속받은 BizException객체
+    public class BizException extends RuntimeException {
+            public BizException(String msg){
+                super(msg);
+            }       
+            public BizException(Exception ex){
+                super(ex);
+            }
+        }
+    ```
+
+  - ```java
+    // BizService클래스는 업무를 처리하는 메소드를 보유
+    public class BizService {
+            public void bizMethod(int i)throws BizException{
+                System.out.println("비지니스 로직이 시작합니다.");
+                if(i < 0){
+                    throw new BizException("매개변수 i는 0이상이어야 합니다.");
+                }
+                System.out.println("비지니스 로직이 종료됩니다.");
+            }
+        }
+    ```
+
+  - ```java
+    // BizService를 이용하는 BizExam 클래스
+    public class BizExam {  
+            public static void main(String[] args) {
+                BizService biz = new BizService();
+                biz.bizMethod(5);
+                try{
+                    biz.bizMethod(-3);
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+    ```
+
